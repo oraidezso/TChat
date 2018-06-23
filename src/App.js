@@ -3,7 +3,11 @@ import React, { Component } from 'react';
 import './App.css';
 import { Input } from './Input';
 import { LanguageSelector } from './LanguageSelector';
-
+const translate = require('./translate');
+translate.engine = 'yandex';
+translate.key = 'trnsl.1.1.20180623T001836Z.40216c12c055cb28.7ac66eee109cfbe489a0acb1cd6ce1707f75deb7';
+translate.from = 'hu';
+translate.to = 'en';
 
 class App extends Component {
   constructor(props) {
@@ -48,7 +52,7 @@ class App extends Component {
             <label>outlang:</label>
             <LanguageSelector  handleLangChange={this.outLangChange}/>
           </div>
-          <div className="col-md-10 h-100">
+          <div className="col-md-10">
             {this.state.name}
           </div>
         </div>

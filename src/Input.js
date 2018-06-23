@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const translate = require('translate');
+const translate = require('./translate');
 
 translate.engine = 'yandex';
 translate.key = 'trnsl.1.1.20180623T001836Z.40216c12c055cb28.7ac66eee109cfbe489a0acb1cd6ce1707f75deb7';
@@ -50,7 +50,7 @@ export class Input extends Component {
           </form>
         </div>
         <div className="col-md-6">
-          <h3>Possible Output</h3>
+          <h3>Output in {this.props.to}</h3>
           <div>
             {this.state.tvalue}
           </div>
