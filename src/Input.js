@@ -16,28 +16,44 @@ export class Input extends Component {
       tvalue: '' 
     };
   }
-
+  componentWillReceiveProps(nextProps) {
+    if (this.state.value!==''){
+      translate( this.state.value, { from: nextProps.from, to: nextProps.to }).then(text =>{
+        this.setState({ tvalue: text });
+      });
+    }
+  }
   handleChange(e) {
     this.setState({ value: e.target.value });
-    translate( e.target.value, { from: this.props.from, to: this.props.to }).then(text =>{
-      this.setState({ tvalue: text });
-      //console.log(text);
-    });
-    //console.log(this.props.from);
+    if (e.target.value!==''){
+      translate( e.target.value, { from: this.props.from, to: this.props.to }).then(text =>{
+        this.setState({ tvalue: text });
+      });
+    }else{
+      this.setState({ tvalue: '' });
+    }
   }
 
   render() {
     return (
-      <div className="input">
-        <h3>Input</h3>    
-        <textarea
-          id="input-content"
-          onChange={this.handleChange}
-          defaultValue={this.state.value}
-        />
-        <h3>Output</h3>
-        <div className="content">
-          {this.state.tvalue}
+      <div>
+        <div className="col-md-6">
+          <h3>Input</h3> 
+          <form>   
+          <textarea
+            className="form-control"
+            id="input-content"
+            onChange={this.handleChange}
+            defaultValue={this.state.value}
+          />
+          <input type='submit' value='send'/>
+          </form>
+        </div>
+        <div className="col-md-6">
+          <h3>Possible Output</h3>
+          <div>
+            {this.state.tvalue}
+          </div>
         </div>
       </div>
     );
