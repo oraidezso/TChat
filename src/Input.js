@@ -13,31 +13,25 @@ export class Input extends Component {
       to:props.to,
       from:props.from,
       value: '',
-      tvalue:'' 
+      tvalue: '' 
     };
   }
 
   handleChange(e) {
     this.setState({ value: e.target.value });
-    translate( e.target.value, { from: this.state.from, to: this.state.to }).then(text =>{
+    translate( e.target.value, { from: this.props.from, to: this.props.to }).then(text =>{
       this.setState({ tvalue: text });
-      console.log(text);
+      //console.log(text);
     });
-    console.log(e.target.value);
+    //console.log(this.props.from);
   }
-  async getTranslated () {
-    return { __html: this.state.value }
-  }
-
-
 
   render() {
-    //const translated = await translate(this.state.value, { to: 'hu' }.text)
     return (
-      <div className="MarkdownEditor">
+      <div className="input">
         <h3>Input</h3>    
         <textarea
-          id="markdown-content"
+          id="input-content"
           onChange={this.handleChange}
           defaultValue={this.state.value}
         />
