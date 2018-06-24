@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import { Input } from './Input';
+import { Chat } from './Chat';
 import { LanguageSelector } from './LanguageSelector';
-const translate = require('./translate');
-translate.engine = 'yandex';
-translate.key = 'trnsl.1.1.20180623T001836Z.40216c12c055cb28.7ac66eee109cfbe489a0acb1cd6ce1707f75deb7';
-translate.from = 'hu';
-translate.to = 'en';
+
 
 class App extends Component {
   constructor(props) {
@@ -16,24 +12,35 @@ class App extends Component {
     this.state = {
       inLang: 'en',
       outLang:'en',
-      name:'',
+      name:"",
       data:'asd'
     };
   }
   inLangChange = newLang => {
     this.setState({inLang:newLang});
-    console.log(newLang);
   }
   outLangChange = newLang => {
     this.setState({outLang:newLang});
-    console.log(newLang);
   }
   handleChange(e) {
     this.setState({ name: e.target.value });
   }
+
+  //
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   render() {
     return (
-      <div className="App">
+      <div className="App" style={{margin:"2em"}} >
+      {this.state.name}
         <div className="row">
           <div className="col-md-2"></div>
           <div className="col-md-5">
@@ -43,17 +50,25 @@ class App extends Component {
             <h1>Original</h1>
           </div>
         </div>
-        <div className="row">
+        <div className="row" style={{padding:"1em"}} >
+
           <div className="col-md-2">
             <label>Your Name:</label>
-            <input type="text" onChange={this.handleChange}></input>
-            <label>Your lang:</label>
-            <LanguageSelector  handleLangChange={this.inLangChange}/>
-            <label>outlang:</label>
-            <LanguageSelector  handleLangChange={this.outLangChange}/>
+            <input type="text" onChange={this.handleChange} value={this.state.name}></input>
+            <div className="row" >
+              <div className="col-md-6">
+                <label>Your lang:</label> <LanguageSelector  handleLangChange={this.inLangChange}/>
+              </div>
+              <div className="col-md-6">
+                <label>Outlang:</label> <LanguageSelector  handleLangChange={this.outLangChange}/>
+              </div>
+            </div>
           </div>
-          <div className="col-md-10">
-            {this.state.name}
+          <div className="col-md-10" style={{height: "500px",overflow: "scroll",padding:"0"}} >
+            <Chat lang={this.state.inLang} />
+            <div style={{ float:"left", clear: "both" }}ref={(el) => { this.messagesEnd = el; }}>
+            {/*dummy div for scrolling to bottom*/}
+          </div>
           </div>
         </div>
         <div className="row">

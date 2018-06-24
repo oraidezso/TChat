@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-const translate = require('./translate');
+import { Translator } from './Translator';
 
-translate.engine = 'yandex';
-translate.key = 'trnsl.1.1.20180623T001836Z.40216c12c055cb28.7ac66eee109cfbe489a0acb1cd6ce1707f75deb7';
-translate.from = 'hu';
-translate.to = 'en';
 export class Input extends Component {
   constructor(props) {
     super(props);
@@ -12,26 +8,17 @@ export class Input extends Component {
     this.state = {
       to:props.to,
       from:props.from,
-      value: '',
-      tvalue: '' 
+      value: ''
     };
-  }
-  componentWillReceiveProps(nextProps) {
-    if (this.state.value!==''){
-      translate( this.state.value, { from: nextProps.from, to: nextProps.to }).then(text =>{
-        this.setState({ tvalue: text });
-      });
-    }
   }
   handleChange(e) {
     this.setState({ value: e.target.value });
-    if (e.target.value!==''){
-      translate( e.target.value, { from: this.props.from, to: this.props.to }).then(text =>{
-        this.setState({ tvalue: text });
-      });
-    }else{
-      this.setState({ tvalue: '' });
-    }
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      to:nextProps.to,
+      from:nextProps.from
+    })
   }
 
   render() {
@@ -51,9 +38,7 @@ export class Input extends Component {
         </div>
         <div className="col-md-6">
           <h3>Output in {this.props.to}</h3>
-          <div>
-            {this.state.tvalue}
-          </div>
+          <Translator from={this.state.from} to={this.state.to} value={this.state.value} />
         </div>
       </div>
     );

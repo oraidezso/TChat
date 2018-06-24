@@ -15,13 +15,13 @@ export class LanguageSelector extends Component {
   
     render() {
       return (
-        <div className="LanguageSelector">
-          <select onChange={this.handleChange} className="form-control" >
+        <span className="LanguageSelector">
+          <select onChange={this.handleChange} className="selectpicker" >
             <option value="en">en</option>
             <option value="hu">hu</option>
             <option value="ru">ru</option>
           </select>
-        </div>
+        </span>
       );
     }
   }
