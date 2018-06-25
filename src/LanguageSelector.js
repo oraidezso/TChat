@@ -24,4 +24,4 @@ export class LanguageSelector extends Component {
         </span>
       );
     }
-  }
+}

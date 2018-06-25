@@ -42,29 +42,11 @@ class App extends Component {
       <div className="App" style={{margin:"2em"}} >
       {this.state.name}
         <div className="row">
-          <div className="col-md-2"></div>
-          <div className="col-md-5">
-            <h1>Translated</h1>
-          </div>
-          <div className="col-md-5">
-            <h1>Original</h1>
-          </div>
+          <div className="col-md-6"><h1>Translated</h1></div>
+          <div className="col-md-6"><h1>Original</h1></div>
         </div>
         <div className="row" style={{padding:"1em"}} >
-
-          <div className="col-md-2">
-            <label>Your Name:</label>
-            <input type="text" onChange={this.handleChange} value={this.state.name}></input>
-            <div className="row" >
-              <div className="col-md-6">
-                <label>Your lang:</label> <LanguageSelector  handleLangChange={this.inLangChange}/>
-              </div>
-              <div className="col-md-6">
-                <label>Outlang:</label> <LanguageSelector  handleLangChange={this.outLangChange}/>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-10" style={{height: "500px",overflow: "scroll",padding:"0"}} >
+          <div className="col-md-12" style={{height: "500px",overflow: "scroll",padding:"0"}} >
             <Chat lang={this.state.inLang} />
             <div style={{ float:"left", clear: "both" }}ref={(el) => { this.messagesEnd = el; }}>
             {/*dummy div for scrolling to bottom*/}
@@ -72,7 +54,20 @@ class App extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-2"></div>
+        <div className="col-md-2">
+            <label>Your Name:</label>
+            <input className = "form-group" type="text" onChange={this.handleChange} value={this.state.name}></input>
+            <div className="row" >
+              <div className="col-md-6">
+                <label>Your lang:</label> <br />
+                <LanguageSelector  handleLangChange={this.inLangChange}/>
+              </div>
+              <div className="col-md-6">
+                <label>Outlang:</label> <br />
+                <LanguageSelector  handleLangChange={this.outLangChange}/>
+              </div>
+            </div>
+          </div>
           <div className="col-md-10">
             <Input from={this.state.inLang} to={this.state.outLang} name={this.state.name}/>
           </div >

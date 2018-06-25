@@ -3,7 +3,7 @@
 	//typeof define === 'function' && define.amd ? define(factory) :
   //(global.translate = factory());
   module.exports = factory();
-}(this, (function () { 'use strict';
+}(this, (function () { 
 
 var iso = [
   "aa", "ab", "ae", "af", "ak", "am", "an", "ar", "as", "av", "ay", "az", "ba",
@@ -100,7 +100,6 @@ var map = {
   "corsican": "co",
   "cree": "cr",
   "welsh": "cy",
-  "czech": "cs",
   "danish": "da",
   "german": "de",
   "divehi": "dv",
@@ -113,18 +112,15 @@ var map = {
   "english": "en",
   "esperanto": "eo",
   "estonian": "et",
-  "basque": "eu",
   "ewe": "ee",
   "faroese": "fo",
   "persian": "fa",
   "fijian": "fj",
   "finnish": "fi",
   "french": "fr",
-  "french": "fr",
   "western frisian": "fy",
   "fulah": "ff",
   "georgian": "ka",
-  "german": "de",
   "gaelic": "gd",
   "scottish gaelic": "gd",
   "irish": "ga",
@@ -141,7 +137,6 @@ var map = {
   "hiri motu": "ho",
   "croatian": "hr",
   "hungarian": "hu",
-  "armenian": "hy",
   "igbo": "ig",
   "icelandic": "is",
   "ido": "io",
@@ -153,7 +148,6 @@ var map = {
   "interlingua": "ia",
   "indonesian": "id",
   "inupiaq": "ik",
-  "icelandic": "is",
   "italian": "it",
   "javanese": "jv",
   "japanese": "ja",
@@ -161,7 +155,6 @@ var map = {
   "greenlandic": "kl",
   "kannada": "kn",
   "kashmiri": "ks",
-  "georgian": "ka",
   "kanuri": "kr",
   "kazakh": "kk",
   "central khmer": "km",
@@ -194,13 +187,9 @@ var map = {
   "maori": "mi",
   "marathi": "mr",
   "malay": "ms",
-  "macedonian": "mk",
   "malagasy": "mg",
   "maltese": "mt",
   "mongolian": "mn",
-  "maori": "mi",
-  "malay": "ms",
-  "burmese": "my",
   "nauru": "na",
   "navajo": "nv",
   "navaho": "nv",
@@ -210,8 +199,6 @@ var map = {
   "north ndebele": "nd",
   "ndonga": "ng",
   "nepali": "ne",
-  "dutch": "nl",
-  "flemish": "nl",
   "norwegian nynorsk": "nn",
   "nynorsk, norwegian": "nn",
   "norwegian bokmål": "nb",
@@ -228,7 +215,6 @@ var map = {
   "ossetic": "os",
   "panjabi": "pa",
   "punjabi": "pa",
-  "persian": "fa",
   "pali": "pi",
   "polish": "pl",
   "portuguese": "pt",
@@ -246,7 +232,6 @@ var map = {
   "sinhala": "si",
   "sinhalese": "si",
   "slovak": "sk",
-  "slovak": "sk",
   "slovenian": "sl",
   "northern sami": "se",
   "samoan": "sm",
@@ -256,7 +241,6 @@ var map = {
   "sotho, southern": "st",
   "spanish": "es",
   "castilian": "es",
-  "albanian": "sq",
   "sardinian": "sc",
   "serbian": "sr",
   "swati": "ss",
@@ -270,7 +254,6 @@ var map = {
   "tajik": "tg",
   "tagalog": "tl",
   "thai": "th",
-  "tibetan": "bo",
   "tigrinya": "ti",
   "tonga": "to",
   "tswana": "tn",
@@ -286,7 +269,6 @@ var map = {
   "venda": "ve",
   "vietnamese": "vi",
   "volapük": "vo",
-  "welsh": "cy",
   "walloon": "wa",
   "wolof": "wo",
   "xhosa": "xh",
@@ -294,7 +276,6 @@ var map = {
   "yoruba": "yo",
   "zhuang": "za",
   "chuang": "za",
-  "chinese": "zh",
   "zulu": "zu"
 };
 
@@ -461,7 +442,7 @@ function Cache () {
 
   this.get = function(key) {
     var data = _cache[key];
-    if (typeof data != "undefined") {
+    if (typeof data !== "undefined") {
       if (isNaN(data.expire) || data.expire >= Date.now()) {
         if (_debug) _hitCount++;
         return data.value;

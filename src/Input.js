@@ -8,6 +8,7 @@ export class Input extends Component {
     this.state = {
       to:props.to,
       from:props.from,
+      name:props.name,
       value: ''
     };
   }
@@ -26,14 +27,18 @@ export class Input extends Component {
       <div>
         <div className="col-md-6">
           <h3>Input</h3> 
-          <form>   
-          <textarea
-            className="form-control"
-            id="input-content"
-            onChange={this.handleChange}
-            defaultValue={this.state.value}
-          />
-          <input type='submit' value='send'/>
+          <form method="post" action="">   
+            <textarea name="message"
+              className="form-control"
+              id="input-content"
+              onChange={this.handleChange}
+              defaultValue={this.state.value}
+            />
+            <input hidden="hidden" readOnly name="lang" value={this.state.from}/>
+            <input hidden="hidden" readOnly name="rid" value="1"/>{/*App statbe még be kell tenni, */}
+            <input hidden="hidden" readOnly name="uid" value="1"/>{/*detto*/}
+            <input hidden="hidden" readOnly name="name" value={this.state.name}/>
+            <input type='submit' value='send'/>
           </form>
         </div>
         <div className="col-md-6">
