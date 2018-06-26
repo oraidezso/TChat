@@ -8,7 +8,7 @@ export class Translator extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        tvalue: '' 
+        tvalue: props.value 
       };
     }
     componentWillReceiveProps(nextProps) {

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Translator } from './Translator';
-var url="/data.php";
-var dat=[];
 
+var url="/data.php";
+var that;
+var refreshInterval=1500;
 export class Chat extends Component {
   constructor(props) {
     super(props);
@@ -10,53 +11,54 @@ export class Chat extends Component {
         data:[],
         lang:props.lang,
     };
-    this.setData=this.setData.bind(this);
-    this.refresh=this.refresh.bind(this);
-
+    this.scrollToBottom=props.scrollToBottom;
+    that=this;
   }
   componentDidMount() {
-    this.interval = setInterval(() => this.refresh(), 10000);
+    this.interval = setInterval(() => this.loadData(url), refreshInterval);
   }
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-  refresh(){
-    this.loadData(url);
-    if(this.state.data!==dat){
-        this.setData();
-    }
-  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
         lang:nextProps.lang,  
     });
-    
   }
   loadData(href){
-    var data = new XMLHttpRequest();
-    data.addEventListener("load", this.parseData);
+    const data = new XMLHttpRequest();
+    data.timeout=3000;
+    data.addEventListener("load", this.setData);
 	data.open("GET", href, true);
     data.send();
   }
-  parseData(){
-      console.log(this.responseText);
-      dat=JSON.parse(this.responseText);
-  }
   setData(){
-    this.setState({data:dat});
+      if(Object.keys(that.state.data).length< Object.keys(JSON.parse(this.responseText)).length){
+        that.setState({data:JSON.parse(this.responseText)})
+        that.scrollToBottom();
+      }
   }
+
   
   messages(data){
+      var count=0;
       return data.map(item=>
-        <div className="row" key={item.id} >
-            <div className="col-md-2" style={{textAlign:'right'}}>{item.name} <br />{item.modtime} </div>
+        <div className="row" key={item.id} style={
+            (count+=1)%2===0
+            ?{backgroundColor:"#efe",color:"#"+((item.userid*150+item.roomid*17+item.name.length)%1000),paddingTop:'0.2em',paddingBottom:'0.2em'}
+            :{backgroundColor:"#fff",color:"#"+((item.userid*150+item.roomid*17+item.name.length)%1000),paddingTop:'0.2em',paddingBottom:'0.2em'}
+        }>
+            <div className="col-md-2" style={{textAlign:'right'}}><b>{item.name}</b> ({item.lang})<br />{item.modtime} </div>
             <div className="col-md-4" style={{textAlign:'left'}}>
                 <Translator to={this.state.lang} from={item.lang} value={item.mes}/>
             </div>
-            <div className="col-md-2" style={{textAlign:'right'}}>{item.name} <br />{item.modtime} </div>
-            <div className="col-md-4" style={{textAlign:'left'}}>{item.mes}</div>
+            <div className="col-md-2" style={{textAlign:'right'}}><b>{item.name}</b>  ({item.lang})<br />{item.modtime} </div>
+            <div className="col-md-4" style={{textAlign:'left'}}>
+                {item.mes}
+            </div>
         </div>
-    );
+        );
   }
   render() {
     return (

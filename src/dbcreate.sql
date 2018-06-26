@@ -7,4 +7,4 @@ CREATE TABLE chat (
     lang char(2) NOT NULL,
     mes TEXT
 );
-insert into chat (userid,name,roomid,lang,mes) values(1,"Dezső",1,"hu","Helló");
+insert into chat (userid,name,roomid,lang,mes) values(1,"Dezső",1,"en","This is magic.");
