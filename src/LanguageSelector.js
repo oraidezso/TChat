@@ -17,8 +17,8 @@ export class LanguageSelector extends Component {
       return (
         <span className="LanguageSelector">
           <select onChange={this.handleChange} className="selectpicker" >
-            <option value="en">en</option>
             <option value="hu">hu</option>
+            <option value="en">en</option>
             <option value="ru">ru</option>
           </select>
         </span>

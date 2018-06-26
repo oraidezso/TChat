@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Translator } from './Translator';
-
+var asd=0;
 var url="/data.php";
 var that;
-var refreshInterval=1500;
+var refreshInterval=2500;
 export class Chat extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +15,7 @@ export class Chat extends Component {
     that=this;
   }
   componentDidMount() {
+    this.loadData(url);
     this.interval = setInterval(() => this.loadData(url), refreshInterval);
   }
   componentWillUnmount() {
@@ -34,9 +35,10 @@ export class Chat extends Component {
     data.send();
   }
   setData(){
-      if(Object.keys(that.state.data).length< Object.keys(JSON.parse(this.responseText)).length){
+      if(Object.keys(that.state.data).length< Object.keys(JSON.parse(this.responseText)).length || asd===0){
         that.setState({data:JSON.parse(this.responseText)})
         that.scrollToBottom();
+        asd+=1;
       }
   }
 
@@ -49,13 +51,13 @@ export class Chat extends Component {
             ?{backgroundColor:"#efe",color:"#"+((item.userid*150+item.roomid*17+item.name.length)%1000),paddingTop:'0.2em',paddingBottom:'0.2em'}
             :{backgroundColor:"#fff",color:"#"+((item.userid*150+item.roomid*17+item.name.length)%1000),paddingTop:'0.2em',paddingBottom:'0.2em'}
         }>
-            <div className="col-md-2" style={{textAlign:'right'}}><b>{item.name}</b> ({item.lang})<br />{item.modtime} </div>
-            <div className="col-md-4" style={{textAlign:'left'}}>
-                <Translator to={this.state.lang} from={item.lang} value={item.mes}/>
-            </div>
             <div className="col-md-2" style={{textAlign:'right'}}><b>{item.name}</b>  ({item.lang})<br />{item.modtime} </div>
             <div className="col-md-4" style={{textAlign:'left'}}>
                 {item.mes}
+            </div>
+            <div className="col-md-2" style={{textAlign:'right'}}><b>{item.name}</b> ({item.lang})<br />{item.modtime} </div>
+            <div className="col-md-4" style={{textAlign:'left'}}>
+                <Translator to={this.state.lang} from={item.lang} value={item.mes}/>
             </div>
         </div>
         );

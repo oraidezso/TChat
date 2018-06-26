@@ -8,8 +8,8 @@ export class Input extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-      to:'en',
-      from:'en',
+      to:'hu',
+      from:'hu',
       name:'',
       value: '',
       roomid: 1,
@@ -32,10 +32,15 @@ export class Input extends Component {
   }
   inLangChange = newLang => {
     this.setState({from:newLang});
-    this.props.handleLangChange(newLang);
   }
   setData(){
     this.setState({value:''});
+  }
+  onEnterPress = (e) => {
+    if(e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
+      this.send();
+    }
   }
   send(){
     const data = new XMLHttpRequest();
@@ -70,6 +75,7 @@ export class Input extends Component {
               className="form-control"
               id="input-content"
               onChange={this.handleChange}
+              onKeyDown={this.onEnterPress}
               value={this.state.value}
             />
             <button type='button' value='send' onClick={this.send}>send</button>

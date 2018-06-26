@@ -8,8 +8,17 @@ export class Translator extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        to:props.to,
+        from:props.from,
         tvalue: props.value 
       };
+    }
+    componentDidMount() {
+      if (this.state.value!==''){
+        translate( this.state.tvalue, { from: this.state.from, to: this.state.to }).then(text =>{
+          this.setState({ tvalue: text });
+        });
+      }else {this.setState({ tvalue: '' });}
     }
     componentWillReceiveProps(nextProps) {
       if (nextProps.value!==''){
