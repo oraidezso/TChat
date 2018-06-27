@@ -43,13 +43,14 @@ export class Input extends Component {
     }
   }
   send(){
-    const data = new XMLHttpRequest();
-    data.timeout=5000;
-    data.addEventListener("load", this.setData);
-    data.open("POST", url, true);
-    data.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    data.send("message="+JSON.stringify(this.state));
-    console.log(JSON.stringify(this.state));
+    if(this.state.value!==''){
+      const data = new XMLHttpRequest();
+      data.timeout=5000;
+      data.addEventListener("load", this.setData);
+      data.open("POST", url, true);
+      data.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      data.send("message="+JSON.stringify(this.state));
+    }
   }
 
   render() {
@@ -70,7 +71,7 @@ export class Input extends Component {
               <span> <LanguageSelector  handleLangChange={this.inLangChange}/> </span>
             </div>
           </div>
-          <form method="post" action="">   
+          <div className="row"> 
             <textarea name="message"
               className="form-control"
               id="input-content"
@@ -79,13 +80,17 @@ export class Input extends Component {
               value={this.state.value}
             />
             <button type='button' value='send' onClick={this.send}>send</button>
-          </form>
+          </div>
         </div>
         
         <div className="col-md-6">
-          <h3 style={{display:"inline-block",margin:"0"}}>Output preview in: </h3>
-          <span style={{display:"inline-block",paddingBottom:"1em"}}> <LanguageSelector  handleLangChange={this.outLangChange}/></span>
-          <Translator from={this.state.from} to={this.state.to} value={this.state.value} />
+          <div className="row">
+            <h3 style={{display:"inline-block",margin:"0"}}>Output preview in: </h3>
+            <LanguageSelector  handleLangChange={this.outLangChange}/>
+          </div>
+          <div className="row">
+            <Translator from={this.state.from} to={this.state.to} value={this.state.value} />
+          </div>
         </div>
       </div>
     );

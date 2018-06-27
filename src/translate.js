@@ -58,6 +58,9 @@ var iso2 = {
 };
 
 var map = {
+  "hungarian": "hu",
+  "english": "en",
+  "french": "fr",
   "afar": "aa",
   "abkhazian": "ab",
   "afrikaans": "af",
@@ -109,7 +112,6 @@ var map = {
   "flemish": "nl",
   "dzongkha": "dz",
   "greek": "el",
-  "english": "en",
   "esperanto": "eo",
   "estonian": "et",
   "ewe": "ee",
@@ -117,7 +119,6 @@ var map = {
   "persian": "fa",
   "fijian": "fj",
   "finnish": "fi",
-  "french": "fr",
   "western frisian": "fy",
   "fulah": "ff",
   "georgian": "ka",
@@ -136,7 +137,6 @@ var map = {
   "hindi": "hi",
   "hiri motu": "ho",
   "croatian": "hr",
-  "hungarian": "hu",
   "igbo": "ig",
   "icelandic": "is",
   "ido": "io",

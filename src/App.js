@@ -32,11 +32,11 @@ class App extends Component {
     return (
       <div className="App" style={{margin:"2em"}} >
         <div className="row">
-          <div className="col-md-6"><h1>Original</h1></div>
           <div className="col-md-6">
             <h1 style={{display:"inline-block",margin:"0"}}>Translate to: </h1> 
             <LanguageSelector  handleLangChange={this.langChange}/>
           </div>
+          <div className="col-md-6"><h1>Original</h1></div>
         </div>
         <div className="row" >
           <div className="col-md-12" style={{height: "500px",overflow: "scroll",padding:"0"}} >

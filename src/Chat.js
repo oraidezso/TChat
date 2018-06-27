@@ -51,13 +51,13 @@ export class Chat extends Component {
             ?{backgroundColor:"#efe",color:"#"+((item.userid*150+item.roomid*17+item.name.length)%1000),paddingTop:'0.2em',paddingBottom:'0.2em'}
             :{backgroundColor:"#fff",color:"#"+((item.userid*150+item.roomid*17+item.name.length)%1000),paddingTop:'0.2em',paddingBottom:'0.2em'}
         }>
-            <div className="col-md-2" style={{textAlign:'right'}}><b>{item.name}</b>  ({item.lang})<br />{item.modtime} </div>
-            <div className="col-md-4" style={{textAlign:'left'}}>
-                {item.mes}
-            </div>
             <div className="col-md-2" style={{textAlign:'right'}}><b>{item.name}</b> ({item.lang})<br />{item.modtime} </div>
             <div className="col-md-4" style={{textAlign:'left'}}>
                 <Translator to={this.state.lang} from={item.lang} value={item.mes}/>
+            </div>
+            <div className="col-md-2" style={{textAlign:'right'}}><b>{item.name}</b>  ({item.lang})<br />{item.modtime} </div>
+            <div className="col-md-4" style={{textAlign:'left'}}>
+                {item.mes}
             </div>
         </div>
         );

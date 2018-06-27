@@ -14,14 +14,14 @@ export class Translator extends Component {
       };
     }
     componentDidMount() {
-      if (this.state.value!==''){
+      if (this.state.tvalue.length!==0){
         translate( this.state.tvalue, { from: this.state.from, to: this.state.to }).then(text =>{
           this.setState({ tvalue: text });
         });
       }else {this.setState({ tvalue: '' });}
     }
     componentWillReceiveProps(nextProps) {
-      if (nextProps.value!==''){
+      if (nextProps.value.length!==0){
         translate( nextProps.value, { from: nextProps.from, to: nextProps.to }).then(text =>{
           this.setState({ tvalue: text });
         });
