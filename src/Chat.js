@@ -10,6 +10,7 @@ export class Chat extends Component {
     this.state = {
         data:[],
         lang:props.lang,
+        roomid:props.roomid
     };
     this.scrollToBottom=props.scrollToBottom;
     that=this;
@@ -31,8 +32,9 @@ export class Chat extends Component {
     const data = new XMLHttpRequest();
     data.timeout=3000;
     data.addEventListener("load", this.setData);
-	data.open("GET", href, true);
-    data.send();
+    data.open("POST", href, true);
+    data.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    data.send("message="+JSON.stringify(this.state));
   }
   setData(){
       if(Object.keys(that.state.data).length< Object.keys(JSON.parse(this.responseText)).length || asd===0){

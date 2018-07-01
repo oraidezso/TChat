@@ -12,8 +12,8 @@ export class Input extends Component {
       from:'hu',
       name:'',
       value: '',
-      roomid: 1,
-      uid:1
+      roomid: props.roomid,
+      uid:props.uid
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.outLangChange = this.outLangChange.bind(this);
