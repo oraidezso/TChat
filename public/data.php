@@ -8,18 +8,10 @@ $result = $conn->query("SELECT * FROM chat where roomid=".$message["roomid"]." O
 //$outp = array();
 //$outp = $result->fetch_all(MYSQLI_ASSOC);//fetch all hiánya miatt átírva
 //echo json_encode($outp)
-if($result){
-$com='';
-echo '[';
+$outp=array();
 while ($row = $result->fetch_assoc()) {
-	echo $com;
-    echo json_encode($row);
-    $com=',';
+	$outp[]=$row;
 }
-echo ']';
-}else{
-    echo $message;
-    echo $_POST["message"];
-}
+echo json_encode($outp);
 $conn->close();
 ?>
